@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()]
   },
   supabase: {
-    redirect: true,
+    redirect: false,
     redirectOptions: {
       login: '/auth/sign-in',
       callback: '/auth/confirm',
