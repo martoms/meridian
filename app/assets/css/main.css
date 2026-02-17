@@ -1,0 +1,10 @@
+/* Hallmark · shape: app screen · genre: modern-minimal · theme: custom
+ * paper: oklch(98% 0.006 255) · accent: oklch(67% 0.16 75) · display: Fira Sans · body: Fira Sans
+ * nav: persistent app header with compact primary navigation · signature: transparent weekly scorecard
+ * states: loading, empty, validation error, save feedback, authenticated data
+ * axes: light/grotesk-sans/warm · posture: restrained · contrast: pass · v2.0.0 */
+/* Hallmark · pre-emit critique: P4 H4 E4 S5 R5 V4 · weakest: E, tokenized every visual state before building routes */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+@import 'tailwindcss';
+@import './tokens.css';
+@import './base.css';
