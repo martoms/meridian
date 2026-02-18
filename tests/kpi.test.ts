@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { createCheckInSnapshot, getMondayWeekStart } from '../app/lib/check-ins'
+import { upsertCheckInForWeek } from '../app/lib/check-in-store'
 import { calculateScore, SCORE_WEIGHTS_TOTAL } from '../app/lib/kpi'
 import { validateActuals, validateGoals } from '../app/lib/validation'
 import type { MetricValues } from '../app/types/kpi'
@@ -75,5 +76,22 @@ describe('weekly check-in snapshots', () => {
   it('uses Monday as the week boundary', () => {
     expect(getMondayWeekStart(new Date('2026-02-22T12:00:00'))).toBe('2026-02-16')
     expect(getMondayWeekStart(new Date('2026-02-23T12:00:00'))).toBe('2026-02-23')
+  })
+
+  it('replaces a check-in for the same user and Monday week', () => {
+    const initial = createCheckInSnapshot({
+      userId: 'user-1',
+      weekStart: '2026-02-16',
+      actuals: zeroActuals,
+      goals
+    })
+    const updated = createCheckInSnapshot({
+      userId: 'user-1',
+      weekStart: '2026-02-16',
+      actuals: { ...zeroActuals, proposals: 2 },
+      goals
+    })
+
+    expect(upsertCheckInForWeek([initial], updated)).toEqual([updated])
   })
 })
