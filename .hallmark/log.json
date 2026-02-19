@@ -1,0 +1,27 @@
+[
+ {
+  "shape": "app screen",
+  "theme": "custom",
+  "axes": "light/grotesk-sans/warm",
+  "hero": "not applicable, authenticated dashboard shell",
+  "nav": "sticky header with tablet tabs and desktop sidebar",
+  "footer": "none in application shell",
+  "imagery": "Meridian cobalt route mark",
+  "photos": [],
+  "entry": "private weekly sales KPI scorecard",
+  "fingerprint": "mobile-first form paired with live weighted score and responsive history table",
+  "sections": [
+   "landing",
+   "sign-in",
+   "onboarding",
+   "dashboard",
+   "history",
+   "settings"
+  ],
+  "signature": "weighted 0 to 100 score with visible raw attainment and capped contribution",
+  "waived": [],
+  "prompt": "Mobile-first Nuxt and Supabase sales KPI dashboard with accessible responsive form and dark mode.",
+  "date": "2026-10-24",
+  "mode": "build"
+ }
+]

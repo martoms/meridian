@@ -1,0 +1,40 @@
+{
+  "builtOn": "2026-10-24",
+  "scope": "app",
+  "signals": [
+    {
+      "source": "user brief",
+      "preserved": [
+        "Nuxt and Supabase integration",
+        "mobile-first responsive form",
+        "WCAG-minded controls",
+        "dark mode",
+        "cobalt primary and amber accent"
+      ]
+    },
+    {
+      "source": "package.json:6-33",
+      "preserved": [
+        "Nuxt 4",
+        "Tailwind 4",
+        "shadcn-vue Nuxt support",
+        "Vitest",
+        "LAN preview scripts"
+      ]
+    },
+    {
+      "source": "app/pages/dashboard.vue:1-156",
+      "preserved": [
+        "single weekly form",
+        "visible score calculation",
+        "validation summary",
+        "polite save feedback"
+      ]
+    }
+  ],
+  "introduced": [
+    "local preview fallback while Supabase credentials are unavailable",
+    "responsive history table with mobile card treatment",
+    "Meridian route favicon used as the app mark"
+  ]
+}
