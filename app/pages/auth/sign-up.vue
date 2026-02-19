@@ -4,6 +4,15 @@
     <h1 class="mt-[var(--space-xs)] text-[var(--text-section)] font-semibold tracking-[-0.02em] text-[var(--color-ink)]">Create your Meridian account.</h1>
     <p class="mt-[var(--space-sm)] text-sm leading-relaxed text-[var(--color-ink-2)]">Start by setting the targets that define a good sales week for you.</p>
 
+    <div v-if="hasErrors" ref="errorSummary" tabindex="-1" class="mt-[var(--space-lg)] rounded-[var(--radius-control)] border border-[var(--color-error)] p-[var(--space-sm)] text-sm text-[var(--color-error-ink)] focus-visible:outline-2 focus-visible:outline-[var(--color-focus)] focus-visible:outline-offset-2" role="alert">
+      <p class="font-semibold">Fix the highlighted fields, then try again.</p>
+      <ul class="mt-[var(--space-xs)] list-disc pl-[var(--space-lg)]">
+        <li v-if="errors.displayName"><a href="#sign-up-name" class="underline">Name: {{ errors.displayName }}</a></li>
+        <li v-if="errors.email"><a href="#sign-up-email" class="underline">Email address: {{ errors.email }}</a></li>
+        <li v-if="errors.password"><a href="#sign-up-password" class="underline">Password: {{ errors.password }}</a></li>
+      </ul>
+    </div>
+
     <p v-if="statusMessage" class="mt-[var(--space-lg)] rounded-[var(--radius-control)] border p-[var(--space-sm)] text-sm" :class="statusTone === 'error' ? 'border-[var(--color-error)] text-[var(--color-error-ink)]' : 'border-[var(--color-rule)] text-[var(--color-ink-2)]'" role="status" aria-live="polite">{{ statusMessage }}</p>
 
     <form novalidate class="mt-[var(--space-lg)] grid gap-[var(--space-md)]" @submit.prevent="handleSubmit">
@@ -48,11 +57,13 @@ const password = ref('')
 const isSubmitting = ref(false)
 const statusMessage = ref('')
 const statusTone = ref<'error' | 'neutral'>('neutral')
+const errorSummary = ref<HTMLElement | null>(null)
 const errors = reactive({
   displayName: '',
   email: '',
   password: ''
 })
+const hasErrors = computed(() => Object.values(errors).some(Boolean))
 
 const validateName = () => {
   errors.displayName = displayName.value.trim().length > 0 ? '' : 'Enter your name.'
@@ -66,14 +77,18 @@ const validatePassword = () => {
   errors.password = password.value.length >= 8 ? '' : 'Use at least 8 characters.'
 }
 
+const focusErrorSummary = async () => {
+  await nextTick()
+  errorSummary.value?.focus()
+}
+
 const handleSubmit = async () => {
   validateName()
   validateEmail()
   validatePassword()
 
   if (errors.displayName || errors.email || errors.password) {
-    statusTone.value = 'error'
-    statusMessage.value = 'Fix the highlighted fields, then try again.'
+    await focusErrorSummary()
     return
   }
 
