@@ -6,7 +6,7 @@
 
     <p v-if="statusMessage" class="mt-[var(--space-lg)] rounded-[var(--radius-control)] border p-[var(--space-sm)] text-sm" :class="statusTone === 'error' ? 'border-[var(--color-error)] text-[var(--color-error-ink)]' : 'border-[var(--color-rule)] text-[var(--color-ink-2)]'" role="status" aria-live="polite">{{ statusMessage }}</p>
 
-    <form class="mt-[var(--space-lg)] grid gap-[var(--space-md)]" @submit.prevent="handleSubmit">
+    <form novalidate class="mt-[var(--space-lg)] grid gap-[var(--space-md)]" @submit.prevent="handleSubmit">
       <div>
         <label for="sign-up-name" class="block text-sm font-medium text-[var(--color-ink)]">Name</label>
         <input id="sign-up-name" v-model.trim="displayName" name="name" autocomplete="name" class="mt-[var(--space-xs)] min-h-11 w-full rounded-[var(--radius-control)] border border-[var(--color-rule)] bg-[var(--color-paper)] px-[var(--space-sm)] text-[var(--color-ink)] outline-2 outline-transparent outline-offset-[-3px] hover:bg-[var(--color-paper-2)] focus-visible:border-[var(--color-ink-2)] focus-visible:outline-[var(--color-focus)]" :aria-invalid="Boolean(errors.displayName)" :aria-describedby="errors.displayName ? 'sign-up-name-error' : undefined" @blur="validateName">

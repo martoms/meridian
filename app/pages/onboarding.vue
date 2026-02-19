@@ -6,7 +6,7 @@
 
     <div v-if="isLoading" class="mt-[var(--space-xl)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-[var(--space-lg)] text-sm text-[var(--color-ink-2)]" role="status">Loading your targets…</div>
 
-    <form v-else class="mt-[var(--space-xl)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-[var(--space-lg)] shadow-[var(--shadow-card)] min-[768px]:p-[var(--space-xl)]" @submit.prevent="handleSubmit">
+    <form v-else novalidate class="mt-[var(--space-xl)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-[var(--space-lg)] shadow-[var(--shadow-card)] min-[768px]:p-[var(--space-xl)]" @submit.prevent="handleSubmit">
       <div v-if="hasErrors" ref="errorSummary" tabindex="-1" class="mb-[var(--space-lg)] rounded-[var(--radius-control)] border border-[var(--color-error)] p-[var(--space-sm)] text-sm text-[var(--color-error-ink)]" role="alert">
         <p class="font-semibold">Review the target fields below.</p>
         <ul class="mt-[var(--space-xs)] list-disc pl-[var(--space-lg)]">
