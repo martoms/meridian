@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="grid gap-[var(--space-md)] min-[768px]:hidden">
-      <article v-for="checkIn in checkIns" :key="checkIn.weekStart" class="border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-[var(--space-md)] shadow-[var(--shadow-card)]">
+      <article v-for="checkIn in checkIns" :key="checkIn.weekStart" class="rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-[var(--space-md)]">
         <div class="flex items-baseline justify-between gap-[var(--space-md)]">
           <h2 class="week-label text-[var(--text-title)] font-semibold tracking-[-0.01em] text-[var(--color-ink)]">{{ formatWeek(checkIn.weekStart) }}</h2>
           <p class="text-[var(--text-xl)] font-bold tabular-nums text-[var(--color-ink)]">{{ getScore(checkIn).score }}<span class="text-sm text-[var(--color-ink-2)]">/100</span></p>

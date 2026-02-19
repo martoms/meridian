@@ -1,5 +1,5 @@
 <template>
-  <section class="w-full border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-[var(--space-lg)] shadow-[var(--shadow-card)] min-[768px]:p-[var(--space-xl)]">
+  <section class="w-full rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-[var(--space-lg)] min-[768px]:p-[var(--space-xl)]">
     <p class="text-sm font-semibold text-[var(--color-primary)]">Your private scorecard</p>
     <h1 class="mt-[var(--space-xs)] text-[var(--text-section)] font-semibold tracking-[-0.02em] text-[var(--color-ink)]">Create your Meridian account.</h1>
     <p class="mt-[var(--space-sm)] text-sm leading-relaxed text-[var(--color-ink-2)]">Start by setting the targets that define a good sales week for you.</p>
@@ -18,19 +18,19 @@
     <form novalidate class="mt-[var(--space-lg)] grid gap-[var(--space-md)]" @submit.prevent="handleSubmit">
       <div>
         <label for="sign-up-name" class="block text-sm font-medium text-[var(--color-ink)]">Name</label>
-        <input id="sign-up-name" v-model.trim="displayName" name="name" autocomplete="name" class="mt-[var(--space-xs)] min-h-11 w-full rounded-[var(--radius-control)] border border-[var(--color-rule)] bg-[var(--color-paper)] px-[var(--space-sm)] text-[var(--color-ink)] outline-2 outline-transparent outline-offset-[-3px] hover:bg-[var(--color-paper-2)] focus-visible:border-[var(--color-ink-2)] focus-visible:outline-[var(--color-focus)]" :aria-invalid="Boolean(errors.displayName)" :aria-describedby="errors.displayName ? 'sign-up-name-error' : undefined" @blur="validateName">
+        <input id="sign-up-name" v-model.trim="displayName" name="name" autocomplete="name" class="mt-[var(--space-xs)] min-h-11 w-full rounded-[var(--radius-control)] border border-[var(--color-muted)] bg-[var(--color-paper)] px-[var(--space-sm)] text-[var(--color-ink)] outline-2 outline-transparent outline-offset-[-3px] hover:bg-[var(--color-paper-2)] focus-visible:border-[var(--color-ink-2)] focus-visible:outline-[var(--color-focus)]" :aria-invalid="Boolean(errors.displayName)" :aria-describedby="errors.displayName ? 'sign-up-name-error' : undefined" @blur="validateName">
         <p id="sign-up-name-error" class="mt-[var(--space-2xs)] min-h-[1lh] text-sm text-[var(--color-error-ink)]">{{ errors.displayName }}</p>
       </div>
 
       <div>
         <label for="sign-up-email" class="block text-sm font-medium text-[var(--color-ink)]">Email address</label>
-        <input id="sign-up-email" v-model.trim="email" name="email" type="email" autocomplete="email" inputmode="email" class="mt-[var(--space-xs)] min-h-11 w-full rounded-[var(--radius-control)] border border-[var(--color-rule)] bg-[var(--color-paper)] px-[var(--space-sm)] text-[var(--color-ink)] outline-2 outline-transparent outline-offset-[-3px] hover:bg-[var(--color-paper-2)] focus-visible:border-[var(--color-ink-2)] focus-visible:outline-[var(--color-focus)]" :aria-invalid="Boolean(errors.email)" :aria-describedby="errors.email ? 'sign-up-email-error' : undefined" @blur="validateEmail">
+        <input id="sign-up-email" v-model.trim="email" name="email" type="email" autocomplete="email" inputmode="email" class="mt-[var(--space-xs)] min-h-11 w-full rounded-[var(--radius-control)] border border-[var(--color-muted)] bg-[var(--color-paper)] px-[var(--space-sm)] text-[var(--color-ink)] outline-2 outline-transparent outline-offset-[-3px] hover:bg-[var(--color-paper-2)] focus-visible:border-[var(--color-ink-2)] focus-visible:outline-[var(--color-focus)]" :aria-invalid="Boolean(errors.email)" :aria-describedby="errors.email ? 'sign-up-email-error' : undefined" @blur="validateEmail">
         <p id="sign-up-email-error" class="mt-[var(--space-2xs)] min-h-[1lh] text-sm text-[var(--color-error-ink)]">{{ errors.email }}</p>
       </div>
 
       <div>
         <label for="sign-up-password" class="block text-sm font-medium text-[var(--color-ink)]">Password</label>
-        <input id="sign-up-password" v-model="password" name="password" type="password" autocomplete="new-password" class="mt-[var(--space-xs)] min-h-11 w-full rounded-[var(--radius-control)] border border-[var(--color-rule)] bg-[var(--color-paper)] px-[var(--space-sm)] text-[var(--color-ink)] outline-2 outline-transparent outline-offset-[-3px] hover:bg-[var(--color-paper-2)] focus-visible:border-[var(--color-ink-2)] focus-visible:outline-[var(--color-focus)]" :aria-invalid="Boolean(errors.password)" :aria-describedby="errors.password ? 'sign-up-password-error' : undefined" @blur="validatePassword">
+        <input id="sign-up-password" v-model="password" name="password" type="password" autocomplete="new-password" class="mt-[var(--space-xs)] min-h-11 w-full rounded-[var(--radius-control)] border border-[var(--color-muted)] bg-[var(--color-paper)] px-[var(--space-sm)] text-[var(--color-ink)] outline-2 outline-transparent outline-offset-[-3px] hover:bg-[var(--color-paper-2)] focus-visible:border-[var(--color-ink-2)] focus-visible:outline-[var(--color-focus)]" :aria-invalid="Boolean(errors.password)" :aria-describedby="errors.password ? 'sign-up-password-error' : undefined" @blur="validatePassword">
         <p id="sign-up-password-error" class="mt-[var(--space-2xs)] min-h-[1lh] text-sm text-[var(--color-error-ink)]">{{ errors.password }}</p>
       </div>
 

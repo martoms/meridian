@@ -1,11 +1,12 @@
 <template>
-  <nav aria-label="Primary navigation" :class="orientation === 'vertical' ? 'grid gap-[var(--space-xs)]' : 'flex min-w-max items-center gap-[var(--space-xs)]'">
+  <nav aria-label="Primary navigation" :class="orientation === 'vertical' ? 'grid gap-[var(--space-xs)]' : 'grid grid-cols-3 gap-[var(--space-2xs)]'">
     <NuxtLink
       v-for="item in navigationItems"
       :key="item.to"
       :to="item.to"
       :class="[
-        'inline-flex min-h-11 items-center gap-2 rounded-[var(--radius-control)] px-[var(--space-sm)] text-sm font-medium whitespace-nowrap no-underline transition-[background-color,color] duration-[var(--dur-micro)] ease-[var(--ease-out)] focus-visible:outline-2 focus-visible:outline-[var(--color-focus)] focus-visible:outline-offset-2',
+        'inline-flex min-h-11 min-w-0 items-center rounded-[var(--radius-control)] font-medium whitespace-nowrap no-underline transition-[background-color,color] duration-[var(--dur-micro)] ease-[var(--ease-out)] focus-visible:outline-2 focus-visible:outline-[var(--color-focus)] focus-visible:outline-offset-2',
+        orientation === 'vertical' ? 'justify-start gap-2 px-[var(--space-sm)] text-sm' : 'justify-center gap-[var(--space-2xs)] px-[var(--space-2xs)] text-xs min-[360px]:gap-[var(--space-xs)] min-[360px]:px-[var(--space-xs)] min-[360px]:text-sm',
         route.path === item.to ? 'bg-[var(--color-paper-2)] text-[var(--color-primary)]' : 'text-[var(--color-ink-2)] hover:bg-[var(--color-paper-2)] hover:text-[var(--color-ink)]'
       ]"
       :aria-current="route.path === item.to ? 'page' : undefined"

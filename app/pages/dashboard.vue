@@ -15,7 +15,7 @@
     <div v-else class="mt-[var(--space-xl)] grid gap-[var(--space-xl)] min-[768px]:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
       <ScoreSummary :result="scoreResult" />
 
-      <form novalidate class="border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-[var(--space-lg)] shadow-[var(--shadow-card)] min-[768px]:p-[var(--space-xl)]" @submit.prevent="handleSubmit">
+      <form novalidate class="rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-[var(--space-lg)] min-[768px]:p-[var(--space-xl)]" @submit.prevent="handleSubmit">
         <div v-if="hasErrors" ref="errorSummary" tabindex="-1" class="mb-[var(--space-lg)] rounded-[var(--radius-control)] border border-[var(--color-error)] p-[var(--space-sm)] text-sm text-[var(--color-error-ink)]" role="alert">
           <p class="font-semibold">Review the check-in fields below.</p>
           <ul class="mt-[var(--space-xs)] list-disc pl-[var(--space-lg)]">

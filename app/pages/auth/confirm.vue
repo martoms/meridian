@@ -1,5 +1,5 @@
 <template>
-  <section class="w-full border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-[var(--space-lg)] shadow-[var(--shadow-card)] min-[768px]:p-[var(--space-xl)]">
+  <section class="w-full rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-[var(--space-lg)] min-[768px]:p-[var(--space-xl)]">
     <h1 class="text-[var(--text-section)] font-semibold tracking-[-0.02em] text-[var(--color-ink)]">Confirming your account.</h1>
     <p class="mt-[var(--space-sm)] text-sm leading-relaxed text-[var(--color-ink-2)]">Meridian is checking the confirmation link from your email.</p>
     <p class="mt-[var(--space-lg)] text-sm text-[var(--color-ink-2)]" role="status" aria-live="polite">{{ statusMessage }}</p>

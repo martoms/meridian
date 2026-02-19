@@ -1,5 +1,5 @@
 <template>
-  <section aria-labelledby="score-summary-title" class="border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-[var(--space-lg)] shadow-[var(--shadow-card)] min-[768px]:p-[var(--space-xl)]">
+  <section aria-labelledby="score-summary-title" class="rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-[var(--space-lg)] min-[768px]:p-[var(--space-xl)]">
     <div class="flex flex-wrap items-end justify-between gap-[var(--space-md)]">
       <div>
         <p class="text-sm font-semibold text-[var(--color-primary)]">Weekly score</p>

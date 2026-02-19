@@ -1,5 +1,5 @@
 <template>
-  <section class="w-full border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-[var(--space-lg)] shadow-[var(--shadow-card)] min-[768px]:p-[var(--space-xl)]">
+  <section class="w-full rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-[var(--space-lg)] min-[768px]:p-[var(--space-xl)]">
     <p class="text-sm font-semibold text-[var(--color-primary)]">Welcome back</p>
     <h1 class="mt-[var(--space-xs)] text-[var(--text-section)] font-semibold tracking-[-0.02em] text-[var(--color-ink)]">Sign in to Meridian.</h1>
     <p class="mt-[var(--space-sm)] text-sm leading-relaxed text-[var(--color-ink-2)]">Continue your private scorecard and weekly check-in.</p>
@@ -9,13 +9,13 @@
     <form novalidate class="mt-[var(--space-lg)] grid gap-[var(--space-md)]" @submit.prevent="handleSubmit">
       <div>
         <label for="sign-in-email" class="block text-sm font-medium text-[var(--color-ink)]">Email address</label>
-        <input id="sign-in-email" v-model.trim="email" name="email" type="email" autocomplete="email" inputmode="email" class="mt-[var(--space-xs)] min-h-11 w-full rounded-[var(--radius-control)] border border-[var(--color-rule)] bg-[var(--color-paper)] px-[var(--space-sm)] text-[var(--color-ink)] outline-2 outline-transparent outline-offset-[-3px] placeholder:text-[var(--color-muted)] hover:bg-[var(--color-paper-2)] focus-visible:border-[var(--color-ink-2)] focus-visible:outline-[var(--color-focus)]" :aria-invalid="Boolean(errors.email)" :aria-describedby="errors.email ? 'sign-in-email-error' : undefined" @blur="validateEmail">
+        <input id="sign-in-email" v-model.trim="email" name="email" type="email" autocomplete="email" inputmode="email" class="mt-[var(--space-xs)] min-h-11 w-full rounded-[var(--radius-control)] border border-[var(--color-muted)] bg-[var(--color-paper)] px-[var(--space-sm)] text-[var(--color-ink)] outline-2 outline-transparent outline-offset-[-3px] placeholder:text-[var(--color-muted)] hover:bg-[var(--color-paper-2)] focus-visible:border-[var(--color-ink-2)] focus-visible:outline-[var(--color-focus)]" :aria-invalid="Boolean(errors.email)" :aria-describedby="errors.email ? 'sign-in-email-error' : undefined" @blur="validateEmail">
         <p id="sign-in-email-error" class="mt-[var(--space-2xs)] min-h-[1lh] text-sm text-[var(--color-error-ink)]">{{ errors.email }}</p>
       </div>
 
       <div>
         <label for="sign-in-password" class="block text-sm font-medium text-[var(--color-ink)]">Password</label>
-        <input id="sign-in-password" v-model="password" name="password" type="password" autocomplete="current-password" class="mt-[var(--space-xs)] min-h-11 w-full rounded-[var(--radius-control)] border border-[var(--color-rule)] bg-[var(--color-paper)] px-[var(--space-sm)] text-[var(--color-ink)] outline-2 outline-transparent outline-offset-[-3px] placeholder:text-[var(--color-muted)] hover:bg-[var(--color-paper-2)] focus-visible:border-[var(--color-ink-2)] focus-visible:outline-[var(--color-focus)]" :aria-invalid="Boolean(errors.password)" :aria-describedby="errors.password ? 'sign-in-password-error' : undefined" @blur="validatePassword">
+        <input id="sign-in-password" v-model="password" name="password" type="password" autocomplete="current-password" class="mt-[var(--space-xs)] min-h-11 w-full rounded-[var(--radius-control)] border border-[var(--color-muted)] bg-[var(--color-paper)] px-[var(--space-sm)] text-[var(--color-ink)] outline-2 outline-transparent outline-offset-[-3px] placeholder:text-[var(--color-muted)] hover:bg-[var(--color-paper-2)] focus-visible:border-[var(--color-ink-2)] focus-visible:outline-[var(--color-focus)]" :aria-invalid="Boolean(errors.password)" :aria-describedby="errors.password ? 'sign-in-password-error' : undefined" @blur="validatePassword">
         <p id="sign-in-password-error" class="mt-[var(--space-2xs)] min-h-[1lh] text-sm text-[var(--color-error-ink)]">{{ errors.password }}</p>
       </div>
 

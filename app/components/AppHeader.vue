@@ -12,7 +12,7 @@
         <NuxtLink v-else to="/auth/sign-in" class="inline-flex min-h-11 items-center rounded-[var(--radius-control)] px-[var(--space-sm)] text-sm font-semibold text-[var(--color-primary)] no-underline focus-visible:outline-2 focus-visible:outline-[var(--color-focus)] focus-visible:outline-offset-2">Sign in</NuxtLink>
       </div>
     </div>
-    <div v-if="isAuthenticated" class="overflow-x-auto border-t border-[var(--color-rule)] px-[var(--space-md)] min-[1280px]:hidden">
+    <div v-if="isAuthenticated" class="border-t border-[var(--color-rule)] px-[var(--space-xs)] min-[1280px]:hidden">
       <AppNavigation />
     </div>
   </header>
