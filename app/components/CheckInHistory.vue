@@ -3,7 +3,7 @@
     <div class="grid gap-[var(--space-md)] min-[768px]:hidden">
       <article v-for="checkIn in checkIns" :key="checkIn.weekStart" class="border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-[var(--space-md)] shadow-[var(--shadow-card)]">
         <div class="flex items-baseline justify-between gap-[var(--space-md)]">
-          <h2 class="text-[var(--text-title)] font-semibold tracking-[-0.01em] text-[var(--color-ink)]">{{ formatWeek(checkIn.weekStart) }}</h2>
+          <h2 class="min-w-0 break-words text-[var(--text-title)] font-semibold tracking-[-0.01em] text-[var(--color-ink)]">{{ formatWeek(checkIn.weekStart) }}</h2>
           <p class="text-[var(--text-xl)] font-bold tabular-nums text-[var(--color-ink)]">{{ getScore(checkIn).score }}<span class="text-sm text-[var(--color-ink-2)]">/100</span></p>
         </div>
         <dl class="mt-[var(--space-md)] grid grid-cols-2 gap-x-[var(--space-md)] gap-y-[var(--space-xs)] border-t border-[var(--color-rule)] pt-[var(--space-sm)] text-sm">
