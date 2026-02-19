@@ -82,6 +82,16 @@ const focusErrorSummary = async () => {
   errorSummary.value?.focus()
 }
 
+const getSignUpErrorMessage = (error: unknown) => {
+  const message = error instanceof Error ? error.message : ''
+
+  if (/email rate limit exceeded|over_email_send_rate_limit/i.test(message)) {
+    return 'Supabase is still trying to send a confirmation email. For this demo, turn off Confirm email in Authentication → Sign In / Providers → Email. Check Authentication → Users before retrying; an unconfirmed account may already exist.'
+  }
+
+  return message || 'We could not create your account. Try again.'
+}
+
 const handleSubmit = async () => {
   validateName()
   validateEmail()
@@ -105,7 +115,7 @@ const handleSubmit = async () => {
     }
 
     const supabase = useSupabaseClient()
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email: email.value,
       password: password.value,
       options: {
@@ -120,11 +130,18 @@ const handleSubmit = async () => {
       throw error
     }
 
+    if (data.session) {
+      statusTone.value = 'neutral'
+      statusMessage.value = 'Your account is ready. You are signed in.'
+      await navigateTo('/onboarding')
+      return
+    }
+
     statusTone.value = 'neutral'
     statusMessage.value = 'Check your inbox to confirm your email address before signing in.'
   } catch (error) {
     statusTone.value = 'error'
-    statusMessage.value = error instanceof Error ? error.message : 'We could not create your account. Try again.'
+    statusMessage.value = getSignUpErrorMessage(error)
   } finally {
     isSubmitting.value = false
   }
