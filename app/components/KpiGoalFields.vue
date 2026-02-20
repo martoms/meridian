@@ -1,7 +1,7 @@
 <template>
   <fieldset class="grid gap-[var(--space-xs)]">
     <legend class="text-[var(--text-title)] font-semibold tracking-[-0.01em] text-[var(--color-ink)]">Weekly targets</legend>
-    <p class="-mt-[var(--space-sm)] text-sm text-[var(--color-ink-2)]">Choose the outcomes that make a strong week for you. Every target must be a whole number greater than zero.</p>
+    <p class="text-sm leading-relaxed text-[var(--color-ink-2)]">Choose the outcomes that make a strong week for you. Every target must be a whole number greater than zero.</p>
 
     <div v-for="metric in metrics" :key="metric.id" class="grid grid-cols-[minmax(0,1fr)_8rem] items-center gap-x-[var(--space-sm)] gap-y-[var(--space-2xs)] border-b border-[var(--color-rule)] pb-[var(--space-sm)] last:border-0 last:pb-0">
       <div class="min-w-0">
