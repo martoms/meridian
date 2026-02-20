@@ -138,7 +138,7 @@ const handleSubmit = async () => {
     }
 
     statusTone.value = 'neutral'
-    statusMessage.value = 'Check your inbox to confirm your email address before signing in.'
+    statusMessage.value = 'Account created, but email confirmation is still enabled in Supabase. Turn off Confirm email in your project’s Email provider settings and try signing in. If this test account is still unconfirmed, confirm it or recreate it.'
   } catch (error) {
     statusTone.value = 'error'
     statusMessage.value = getSignUpErrorMessage(error)

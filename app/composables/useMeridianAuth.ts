@@ -20,7 +20,11 @@ export const useMeridianAuth = () => {
   })
 
   const user = computed<PreviewUser | null>(() => {
-    if (supabaseUser.value) {
+    if (isSupabaseConfigured.value) {
+      if (!supabaseUser.value) {
+        return null
+      }
+
       return {
         id: supabaseUser.value.id,
         email: supabaseUser.value.email ?? '',
@@ -32,6 +36,10 @@ export const useMeridianAuth = () => {
   })
 
   const startPreviewSession = (email: string, displayName: string | null = null) => {
+    if (isSupabaseConfigured.value) {
+      return
+    }
+
     previewUser.value = {
       id: 'preview-user',
       email,
@@ -40,17 +48,17 @@ export const useMeridianAuth = () => {
   }
 
   const signOut = async () => {
+    previewUser.value = null
+
     if (isSupabaseConfigured.value) {
       const supabase = useSupabaseClient()
       await supabase.auth.signOut()
     }
-
-    previewUser.value = null
   }
 
   return {
     isAuthenticated: computed(() => Boolean(user.value)),
-    isPreview: computed(() => Boolean(previewUser.value) && !supabaseUser.value),
+    isPreview: computed(() => Boolean(previewUser.value) && !isSupabaseConfigured.value),
     isSupabaseConfigured,
     signOut,
     startPreviewSession,

@@ -55,6 +55,16 @@ const validatePassword = () => {
   errors.password = password.value.length > 0 ? '' : 'Enter your password.'
 }
 
+const getSignInErrorMessage = (error: unknown) => {
+  const message = error instanceof Error ? error.message : ''
+
+  if (/email not confirmed/i.test(message)) {
+    return 'This account is not confirmed yet. For this demo, turn off Confirm email in your Supabase Email provider settings and try again. If this test account is still unconfirmed, confirm it or recreate it.'
+  }
+
+  return message || 'We could not sign you in. Try again.'
+}
+
 const handleSubmit = async () => {
   validateEmail()
   validatePassword()
@@ -90,7 +100,7 @@ const handleSubmit = async () => {
     await navigateTo(typeof route.query.next === 'string' ? route.query.next : '/dashboard')
   } catch (error) {
     statusTone.value = 'error'
-    statusMessage.value = error instanceof Error ? error.message : 'We could not sign you in. Try again.'
+    statusMessage.value = getSignInErrorMessage(error)
   } finally {
     isSubmitting.value = false
   }

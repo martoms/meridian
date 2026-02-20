@@ -88,12 +88,31 @@ export const useKpiRepository = () => {
   const supabase = useSupabaseClient<Database>()
   const { isSupabaseConfigured } = useMeridianAuth()
 
+  const getAuthenticatedUserId = async (expectedUserId: string) => {
+    const { data, error } = await supabase.auth.getUser()
+
+    if (error) {
+      throw error
+    }
+
+    if (!data.user) {
+      throw new Error('Your Supabase session has expired. Sign in again before accessing saved data.')
+    }
+
+    if (data.user.id !== expectedUserId) {
+      throw new Error('Your active account changed. Reload the page and sign in again before continuing.')
+    }
+
+    return data.user.id
+  }
+
   const loadGoals = async (userId: string) => {
     if (!isSupabaseConfigured.value) {
       return readLocalStore().goalsByUserId[userId] ?? null
     }
 
-    const { data, error } = await supabase.from('kpi_goals').select().eq('user_id', userId).maybeSingle()
+    const authenticatedUserId = await getAuthenticatedUserId(userId)
+    const { data, error } = await supabase.from('kpi_goals').select().eq('user_id', authenticatedUserId).maybeSingle()
 
     if (error) {
       throw error
@@ -110,7 +129,8 @@ export const useKpiRepository = () => {
       return
     }
 
-    const { error } = await supabase.from('kpi_goals').upsert(mapGoalsToInsert(userId, goals), {
+    const authenticatedUserId = await getAuthenticatedUserId(userId)
+    const { error } = await supabase.from('kpi_goals').upsert(mapGoalsToInsert(authenticatedUserId, goals), {
       onConflict: 'user_id'
     })
 
@@ -124,10 +144,11 @@ export const useKpiRepository = () => {
       return readLocalStore().checkIns.filter((checkIn) => checkIn.userId === userId).sort((a, b) => b.weekStart.localeCompare(a.weekStart))
     }
 
+    const authenticatedUserId = await getAuthenticatedUserId(userId)
     const { data, error } = await supabase
       .from('weekly_check_ins')
       .select()
-      .eq('user_id', userId)
+      .eq('user_id', authenticatedUserId)
       .order('week_start', { ascending: false })
 
     if (error) {
@@ -145,9 +166,14 @@ export const useKpiRepository = () => {
       return checkIn
     }
 
+    const authenticatedUserId = await getAuthenticatedUserId(checkIn.userId)
+    const authenticatedCheckIn = {
+      ...checkIn,
+      userId: authenticatedUserId
+    }
     const { data, error } = await supabase
       .from('weekly_check_ins')
-      .upsert(mapCheckInToInsert(checkIn), {
+      .upsert(mapCheckInToInsert(authenticatedCheckIn), {
         onConflict: 'user_id,week_start'
       })
       .select()
