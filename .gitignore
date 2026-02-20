@@ -22,3 +22,9 @@ logs
 .env
 .env.*
 !.env.example
+
+# Editor backup files
+.*~
+
+# Supabase CLI local state
+supabase/.temp/
