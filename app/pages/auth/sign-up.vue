@@ -50,7 +50,7 @@ useHead({
   title: 'Create account'
 })
 
-const { isSupabaseConfigured, startPreviewSession } = useMeridianAuth()
+const { isSupabaseConfigured, signUp, startPreviewSession } = useMeridianAuth()
 const displayName = ref('')
 const email = ref('')
 const password = ref('')
@@ -114,16 +114,11 @@ const handleSubmit = async () => {
       return
     }
 
-    const supabase = useSupabaseClient()
-    const { data, error } = await supabase.auth.signUp({
+    const { data, error } = await signUp({
       email: email.value,
       password: password.value,
-      options: {
-        data: {
-          display_name: displayName.value
-        },
-        emailRedirectTo: `${window.location.origin}/auth/confirm`
-      }
+      displayName: displayName.value,
+      emailRedirectTo: `${window.location.origin}/auth/confirm`
     })
 
     if (error) {

@@ -88,7 +88,7 @@ export const useKpiRepository = () => {
   const supabase = useSupabaseClient<Database>()
   const { isSupabaseConfigured } = useMeridianAuth()
 
-  const getAuthenticatedUserId = async (expectedUserId: string) => {
+  const getAuthenticatedUserId = async () => {
     const { data, error } = await supabase.auth.getUser()
 
     if (error) {
@@ -99,10 +99,6 @@ export const useKpiRepository = () => {
       throw new Error('Your Supabase session has expired. Sign in again before accessing saved data.')
     }
 
-    if (data.user.id !== expectedUserId) {
-      throw new Error('Your active account changed. Reload the page and sign in again before continuing.')
-    }
-
     return data.user.id
   }
 
@@ -111,7 +107,7 @@ export const useKpiRepository = () => {
       return readLocalStore().goalsByUserId[userId] ?? null
     }
 
-    const authenticatedUserId = await getAuthenticatedUserId(userId)
+    const authenticatedUserId = await getAuthenticatedUserId()
     const { data, error } = await supabase.from('kpi_goals').select().eq('user_id', authenticatedUserId).maybeSingle()
 
     if (error) {
@@ -129,7 +125,7 @@ export const useKpiRepository = () => {
       return
     }
 
-    const authenticatedUserId = await getAuthenticatedUserId(userId)
+    const authenticatedUserId = await getAuthenticatedUserId()
     const { error } = await supabase.from('kpi_goals').upsert(mapGoalsToInsert(authenticatedUserId, goals), {
       onConflict: 'user_id'
     })
@@ -144,7 +140,7 @@ export const useKpiRepository = () => {
       return readLocalStore().checkIns.filter((checkIn) => checkIn.userId === userId).sort((a, b) => b.weekStart.localeCompare(a.weekStart))
     }
 
-    const authenticatedUserId = await getAuthenticatedUserId(userId)
+    const authenticatedUserId = await getAuthenticatedUserId()
     const { data, error } = await supabase
       .from('weekly_check_ins')
       .select()
@@ -166,7 +162,7 @@ export const useKpiRepository = () => {
       return checkIn
     }
 
-    const authenticatedUserId = await getAuthenticatedUserId(checkIn.userId)
+    const authenticatedUserId = await getAuthenticatedUserId()
     const authenticatedCheckIn = {
       ...checkIn,
       userId: authenticatedUserId

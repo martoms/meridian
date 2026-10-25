@@ -36,7 +36,7 @@ useHead({
 })
 
 const route = useRoute()
-const { isSupabaseConfigured, startPreviewSession } = useMeridianAuth()
+const { isSupabaseConfigured, signInWithPassword, startPreviewSession } = useMeridianAuth()
 const email = ref('')
 const password = ref('')
 const isSubmitting = ref(false)
@@ -87,11 +87,7 @@ const handleSubmit = async () => {
       return
     }
 
-    const supabase = useSupabaseClient()
-    const { error } = await supabase.auth.signInWithPassword({
-      email: email.value,
-      password: password.value
-    })
+    const { error } = await signInWithPassword(email.value, password.value)
 
     if (error) {
       throw error
